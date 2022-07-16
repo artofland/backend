@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "blocks",
+  "info": {
+    "singularName": "block",
+    "pluralName": "blocks",
+    "displayName": "block",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "x": {
+      "type": "float"
+    },
+    "y": {
+      "type": "float"
+    },
+    "z": {
+      "type": "float"
+    },
+    "material": {
+      "type": "integer"
+    },
+    "owner": {
+      "type": "integer"
+    }
+  }
+}
