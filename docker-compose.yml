@@ -1,0 +1,28 @@
+version: '3.3'
+networks:
+    web:
+      external: true
+  
+
+services:
+    artoflandbackend:
+        restart: always
+        networks:
+            - web 
+        image: ghcr.io/artofland/backend:master
+        env_file:
+            - "./.env"
+        labels:
+            - traefik.enable=true
+
+            - traefik.http.routers.artoflandbackend-http.entrypoints=web
+            - traefik.http.routers.artoflandbackend-http.rule=Host(`backend.artof.land`)
+            
+            - traefik.http.middlewares.https-redirect.redirectscheme.scheme=https
+            - traefik.http.middlewares.https-redirect.redirectscheme.permanent=true
+            - traefik.http.routers.artoflandbackend-http.middlewares=https-redirect@docker
+            
+            - traefik.http.routers.artoflandbackend-https.entrypoints=websecure
+            - traefik.http.routers.artoflandbackend-https.rule=Host(`backend.artof.land`)
+            - traefik.http.routers.artoflandbackend-https.tls=true
+            - traefik.http.routers.artoflandbackend-https.tls.certresolver=letsencrypt
